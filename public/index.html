@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulation Lab Resource Booking</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: url('image.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 20px;
+      position: relative;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #ffffffcc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    header img {
+      height: 80px;
+      margin-right: 15px;
+    }
+
+    header h2 {
+      margin: 0;
+      color: #2c3e50;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      color: #555;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-right: 40px;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2e86de;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #2e86de;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #1b4f72;
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      color: green;
+    }
+
+    .left-labels {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif;
+  color: #2c3e50;
+}
+
+.left-labels h1 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  font-weight: lighter;
+}
+
+.left-labels h2 {
+  margin: 10px 0 0;
+  font-size: 50px;
+  font-weight: bold;
+  color: #2e86de;
+}
+
+
+    @media (max-width: 700px) {
+      .overlay {
+        align-items: center;
+      }
+
+      .container {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .left-labels {
+        position: static;
+        margin-bottom: 20px;
+      }
+    }
+    .footer {
+  text-align: center;
+  padding: 15px 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="overlay">
+    <header>
+      <img src="clg-logo.jpg" alt="Sri Eshwar Logo">
+      <div>
+        <h2>Sri Eshwar College of Engineering</h2>
+        <p>Autonomous Institution | Coimbatore, Tamil Nadu</p>
+      </div>
+    </header>
+
+    <!-- ✅ Left-side department and title -->
+    <div class="left-labels">
+<!--     <h1>Department of</h1>
+      <h1>Electronics & Communication Engineering</h1>-->  
+      <h2>SIM LAB</h2>
+    </div>
+
+    <div class="container">
+      <h2>Simulation Lab Resource Booking</h2>
+      <form id="bookingForm">
+        <input id="name" type="text" placeholder="Your Name" required />
+        <input id="regNo" type="text" placeholder="Reg. No." required />
+        <input id="mentor" type="text" placeholder="Mentor Name" required />
+        <input id="lab" type="text" placeholder="Lab Name" required />
+        <input id="reason" type="text" placeholder="Reason for OD" required />
+        <input id="date" type="date" required />
+        <input id="time" type="time" required />
+        <button type="submit">Submit Booking</button>
+      </form>
+      <p id="message"></p>
+    </div>
+<footer class="footer">
+  Powered by <strong>Dept. of ECE</strong>, 2025
+</footer>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics-compat.js"></script>
+
+  <!-- Firebase Config -->
+  <script src="firebase-config.js"></script>
+  <script src="student.js"></script>
+  
+
+</body>
+</html>
